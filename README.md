@@ -20,6 +20,6 @@ Installation by adding the CmsServiceProvider to config/app.php
        *
        * @param a the array to be sorted
        */
-      public static void sort(byte[] a) {
-          DualPivotQuicksort.sort(a);
+      public function test() {
+          return 123;
       }
