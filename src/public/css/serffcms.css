@@ -1,0 +1,45 @@
+.serff_top_bar {
+    top: 0;
+    height: 40px;
+    background-color: #316AC5;
+    z-index: 1000;
+    position: fixed;
+    width: 100%;
+}
+
+.serff_top_bar .menu_item {
+    font-size: 11pt;
+    float: left;
+    margin: auto auto;
+    padding: 9px;
+    border-right: 1px solid #FFF;
+    color: #FFF;
+}
+
+.serff_top_bar .float_right {
+    float: right;
+    border-left: 1px solid #FFF;
+}
+
+.serff_top_bar .menu_item:hover {
+    background-color: #00A7D0;
+}
+
+body {
+    margin-top: 40px;
+}
+
+.serff_top_bar a {
+    color: #FFF;
+    text-decoration: none;
+}
+
+.translation-element {
+    border: 1px dashed darkblue;
+    padding: 2px;
+}
+
+.page-editor-element {
+    border: 1px dashed darkblue;
+    display: block;
+}

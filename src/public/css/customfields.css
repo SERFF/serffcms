@@ -1,0 +1,66 @@
+#field_items_header {
+    border-bottom: 1px solid #F5F5F5;
+}
+
+.label-form-input {
+    font-weight: bold;
+}
+
+@media screen and (min-width: 992px) {
+    #field_item_wrapper.active {
+        margin-bottom: 70px;
+    }
+
+    #field_item_wrapper .row {
+        height: 45px;
+        padding-top: 12px;
+    }
+}
+
+#field_item_wrapper.active .field_item_fields {
+    display: block;
+}
+
+#field_item_wrapper .field_item_fields {
+    display: none;
+}
+
+#field_item_wrapper.active #field_item_header {
+    background-color: #00A7D0;
+    color: #FFF;
+}
+#field_item_wrapper #field_item_header {
+    background-color: #F5F5F5;
+    color: #000;
+    border-bottom:1px solid #00A7D0;
+}
+#field_item_wrapper.active a{
+    color:#fff;
+}
+#field_item_wrapper a{
+    color:#000;
+}
+#field_item_header .input_sorter {
+    border-radius: 50%;
+
+    width: 26px;
+    height: 42px;
+    padding: 10px;
+    margin-top: 5px;
+    color: #000;
+    border: 1px solid #000;
+
+    text-align: center;
+    font-weight: bold;
+}
+
+#field_item_wrapper.active .input_sorter {
+    color: #FFF;
+    border: 1px solid #FFF;
+}
+#rulesGroups .btn-delete-rules-item {
+    display: none;
+}
+#rulesGroups .rules-group:nth-child(n+2) .btn-delete-rules-item{
+    display: block;
+}

@@ -1,0 +1,12 @@
+#itemsWrapper, li {
+    margin:0;
+    padding:0;
+    list-style: none;
+}
+#itemsWrapper li {
+    border-radius: 5px;
+    border: 1px solid #CCCCCC;
+    padding:15px;
+    font-weight: bold;
+    background-color: #F5F5F5;
+}

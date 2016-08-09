@@ -1,0 +1,9 @@
+.modal .modal-body {
+    max-height: 420px;
+    overflow-y: auto;
+}
+
+.modal img.active {
+    border:3px solid blue;
+    opacity: .4;
+}

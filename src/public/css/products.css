@@ -1,0 +1,26 @@
+.modal .modal-body {
+    max-height: 420px;
+    overflow-y: auto;
+}
+
+.modal img.active {
+    border:3px solid blue;
+    opacity: .4;
+}
+.attributes {
+    margin:0;
+    padding:0;
+    list-style: none;
+    min-height:300px;
+}
+.attributes li {
+    width:100%;
+    margin:3px;
+    padding:5px;
+    list-style: none;
+    border: 1px solid #3c8dbc;
+    background-color: #3c8dbc;
+    color:#fff;
+    font-weight: bold;
+    border-radius: 2px;
+} 
