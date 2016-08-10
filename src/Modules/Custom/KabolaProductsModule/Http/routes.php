@@ -34,3 +34,7 @@ Route::get('groep/{id}', ['as' => 'product.category.view', 'uses' => 'ProductsCo
 
 Route::post('products/filtered', ['as' => 'products.filtered', 'uses' => 'ProductsController@postFiltered']);
 Route::post('products/tailor-made', ['as' => 'products.tailer_made', 'uses' => 'ProductsController@postTailorMade']);
+
+Route::post('configurator/calculate', ['as' => 'configurator.calculate', 'uses' => 'ConfiguratorController@postCalculate']);
+Route::get('configurator/overview', ['as' => 'configurator.overview', 'uses' => 'ConfiguratorController@getOverview']);
+Route::post('configurator/filtered', ['as' => 'configurator.filtered', 'uses' => 'ConfiguratorController@postFiltered']);

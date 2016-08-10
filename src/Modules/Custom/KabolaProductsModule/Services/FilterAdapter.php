@@ -38,7 +38,6 @@ class FilterAdapter
      */
     public static function transformAppliciance(array $appliance)
     {
-        \Log::info($appliance);
         if ((count($appliance) == 0)) {
             return ['CV', 'BOILER', 'COMBI'];
         }

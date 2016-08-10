@@ -62,63 +62,9 @@
         </div>
     </div>
 
-
-    {{--<div class="configurator wow animated fadeIn">
-        <div class="section">
-            <div class="configurator-content">
-                <h1>Which boiler suits me?</h1>
-                <p>The options with our boilers are endless. From fishing boats, horse trailer, barge to chalets. Enter
-                    your preferences and we indicate you which type of boiler best suits your needs. Consult our
-                    advisors for specific advice.</p>
-                <h3>Application (multiple options possible)</h3>
-                <form>
-							<span id="application">
-								<input type="checkbox" id="CentralHeating" value="CentralHeating">
-								<label for="CentralHeating">Central Heating</label>
-								<input type="checkbox" id="HotWater" value="HotWater">
-								<label for="HotWater">Hot water</label>
-								<input type="checkbox" id="HotAir" value="HotAir">
-								<label for="HotAir">Hot air</label>
-								<input type="checkbox" id="Airco" value="Airco">
-								<label for="Airco">Airconditioning</label>
-							</span>
-                    <span id="heatingspace">
-								<h3>Heating space</h3>
-								<select>
-									<option>10-30 m3</option>
-									<option>30-50 m3</option>
-									<option>50-75 m3</option>
-									<option>75+ m3</option>							
-								</select>
-							</span>
-                    <span id="isolation">
-								<h3>Isolation</h3>
-								<select>
-									<option>Bad (factor 150)</option>
-									<option>Good (factor 120)</option>
-								</select>
-							</span>
-                    <span id="applicationarea">
-								<h3>Application area</h3>
-								<select>
-									<option>Maritiem</option>
-									<option>Automotive</option>
-									<option>Gebouwen</option>
-									<option>Waterverwarming</option>
-									<option>Overig</option>
-								</select>
-							</span>
-                    <input type="submit" value="Show my advice »" id="submit">
-                </form>
-            </div>
-            <div class="configurator-sidebar wow animated5 fadeInUp">
-                <img src="/themes/kabola/assets/img/teamphoto-tijdelijk.png">
-                <h3>Contact our advisors:</h3>
-                <span>+31 347 320030</span>
-                <a href="">info@kabola.nl</a>
-            </div>
-        </div>
-    </div>--}}
+    <div class="configurator wow animated fadeIn">
+        @include('partials.configurator')
+    </div>
     <div class="findadealerbar">
         <div class="section">
             <h1>{!! translate('kabola.home_find_closest_dealer') !!}</h1>

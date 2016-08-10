@@ -76,14 +76,13 @@ class TranslationService
      */
     public function updateRecordsWithLangFiles($folder_locale = null, $destination_locale = null)
     {
-        $disk = (Storage::disk('lang'));
         if (is_null($folder_locale)) {
-            $files = $disk->allFiles('/');
+            $files = \File::allFiles(resource_path('lang'));
         } else {
-            if (!$disk->has('/' . $folder_locale)) {
+            if (!\File::exists(resource_path('lang/' . $folder_locale))) {
                 return;
             }
-            $files = $disk->allFiles('/' . $folder_locale);
+            $files = \File::allFiles(resource_path('lang/' . $folder_locale));
         }
 
         foreach ($files as $file) {

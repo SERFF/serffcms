@@ -34,5 +34,6 @@ class Kabola extends Theme implements ThemeContract
         $this->registerTemplate('Contact', 'contact');
         $this->registerTemplate('Find A Dealer', 'findadealer');
         $this->registerTemplate('Product Overview', 'product_overview');
+        $this->registerTemplate('Product Configurator', 'configurator-template');
     }
 }
