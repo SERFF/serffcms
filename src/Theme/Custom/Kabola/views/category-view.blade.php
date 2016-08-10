@@ -57,18 +57,28 @@
                     <h2>{!! translate('kabola.products.technical_information') !!}</h2>
                     @php
                         $best_choice = false;
+                        $product_selected = false;
+                        $value_item = 0;
+                        if((Request::get('best_choice', 0) > 0)) {
+                            $value_item = Request::get('best_choice', 0); 
+                            $best_choice = true;
+                        }
+                        if((Request::get('selected_product', 0) > 0)) {
+                            $value_item = Request::get('selected_product', 0);
+                             $product_selected = true;
+                        }
                         $class_name = '';
                         $header_element = 'th';
-                        if((Request::get('best_choice', 0) > 0)) {
+                        if($value_item > 0) {
                         $element_found = 1;
                         $advice  = 0;
                         foreach(array_get($category, 'products', []) as $product) {
-                            if(array_get($product, 'id') == Request::get('best_choice', 0)) {
+                            if(array_get($product, 'id') == $value_item) {
                                 $advice = $element_found + 1;
                             }
                             $element_found++;
                         }
-                        $best_choice = true;
+                        
                         $class_name = 'advice'.$advice;
                         $header_element = 'td';
                         }
@@ -77,7 +87,14 @@
                         @if($best_choice)
                             <tr class="bestekeuze">
                                 @for($i = 0; $i <= count(array_get($category, 'products', [])); $i++)
-                                    <td>Beste keus</td>
+                                    <td>{!! translate('kabola.category_view.best_choice') !!}</td>
+                                @endfor
+                            </tr>
+                        @endif
+                        @if($product_selected)
+                            <tr class="bestekeuze">
+                                @for($i = 0; $i <= count(array_get($category, 'products', [])); $i++)
+                                    <td>{!! translate('kabola.category_view.selected_product') !!}</td>
                                 @endfor
                             </tr>
                         @endif

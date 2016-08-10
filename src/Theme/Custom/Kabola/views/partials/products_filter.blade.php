@@ -18,21 +18,13 @@
 	<h3>{!! translate('kabola.products.appliance') !!}</h3>
 	<ul>
 		<li>
-			<input type="checkbox" id="111">
-			<label for="1">Centrale verwarming</label>
+			<input type="checkbox" id="111" name="appliciance[]" value="a">
+			<label for="111">Centrale verwarming</label>
 		</li>
 		<li>
-			<input type="checkbox" id="112">
-			<label for="2">Heet water</label>
-		</li>
-		<li>
-			<input type="checkbox" id="114">
-			<label for="4">Hete lucht</label>
-		</li>
-		<li>
-			<input type="checkbox" id="113">
-			<label for="3">Airconditioning</label>
-		</li>
+			<input type="checkbox" id="112" name="appliciance[]" value="b">
+			<label for="112">Heet water</label>
+		</li>		
 	</ul>
 </span>
 <span>
@@ -95,7 +87,7 @@
 @section('scripts')
     @parent
     <script defer="defer">
-        var option_products, water_cb, capacity, efficiency;
+        var option_products, water_cb, capacity, efficiency, appliciance;
 
         $(function () {
             $.ajaxSetup({
@@ -105,42 +97,53 @@
             });
 
             $('input[name="option_product[]"]').on('change', function () {
-                option_products = [];
-                $('input[name="option_product[]"]:checked').each(function () {
-                    option_products[option_products.length] = $(this).val();
-                });
-
+				option_products = get_item_values('option_product', option_products);
                 update_products();
             });
 
             $('input[name="water_cb[]"]').on('change', function () {
-                water_cb = [];
-                $('input[name="water_cb[]"]:checked').each(function () {
-                    water_cb[water_cb.length] = $(this).val();
-                });
-
+				water_cb = get_item_values('water_cb', water_cb);
                 update_products();
             });
 
             $('input[name="capacity[]"]').on('change', function () {
-                capacity = [];
-                $('input[name="capacity[]"]:checked').each(function () {
-                    capacity[capacity.length] = $(this).val();
-                });
-
+				capacity = get_item_values('capacity', capacity);
                 update_products();
             });
 
-            $('input[name="efficiency[]"]').on('change', function () {
-                efficiency = [];
-                $('input[name="efficiency[]"]:checked').each(function () {
-                    efficiency[efficiency.length] = $(this).val();
-                });
+//            $('input[name="efficiency[]"]').on('change', function () {
+//				efficiency = get_item_values('efficiency', efficiency);
+//                update_products();
+//            });
 
+            $('input[name="appliciance[]"]').on('change', function () {
+				appliciance = get_item_values('appliance', appliciance);
                 update_products();
             });
+
+            load_preloaded_items();
+
         });
 
+        function load_preloaded_items() {
+			option_products = get_item_values('option_product', option_products);
+			water_cb = get_item_values('water_cb', water_cb);
+			capacity = get_item_values('capacity', capacity);
+//			efficiency = get_item_values('efficiency', efficiency);
+			appliciance = get_item_values('appliance', appliciance);
+			if((option_products.length > 0) || (water_cb.length > 0) || (capacity.length > 0) || /*(efficiency.length > 0) ||*/ (appliciance.length > 0)) {
+				update_products();
+			} 
+		}
+        
+        function get_item_values(key, variables) {
+			variables = [];
+			$('input[name="'+key+'[]"]:checked').each(function () {
+				variables[variables.length] = $(this).val();
+			});
+			return variables;
+		}
+		
         function update_products() {
             $.ajax({
                 url: "{{ route('products.filtered') }}",
@@ -149,7 +152,8 @@
                     option_products: option_products,
                     water_cb: water_cb,
                     capacity: capacity,
-                    efficiency: efficiency
+//                    efficiency: efficiency,
+                    appliciance: appliciance
                 }
             }).done(function (result) {
                 $('#products').html(result);

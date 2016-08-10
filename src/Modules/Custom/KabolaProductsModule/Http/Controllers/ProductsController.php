@@ -83,6 +83,7 @@ class ProductsController extends Controller
             'water_cb'        => $request->get('water_cb', []),
             'capacity'        => $request->get('capacity', []),
             'efficiency'      => $request->get('efficiency', []),
+            'appliance'       => $request->get('appliciance', []),
         ];
 
         $this->storeSessionData($filters);
@@ -90,19 +91,21 @@ class ProductsController extends Controller
         $categories = app(FilterService::class)->filtered($filters);
 
         $best_choice = null;
+
         if (count($categories) < 10) {
-            $best_choice = array_get($categories, 0);
+            $best_choice = array_get($categories, 0, null);
         }
 
         return ThemeView::getView('partials.products', [
-            'categories'  => $categories,
-            'best_choice' => $best_choice,
+            'categories'       => $categories,
+            'best_choice'      => $best_choice,
+            'products_defined' => true,
         ]);
     }
 
     /**
      * Store the session request data for tailor made suggestions
-     * 
+     *
      * @param $data
      */
     protected function storeSessionData($data)
@@ -118,9 +121,9 @@ class ProductsController extends Controller
     {
         $this->validate($request, [
             'email' => 'required|email',
-            'phone' => 'required'
+            'phone' => 'required',
         ]);
-        
+
         $tailorMadeService->send($request->get('email'), $request->get('phone'));
     }
 }

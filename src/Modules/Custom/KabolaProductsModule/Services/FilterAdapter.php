@@ -1,6 +1,11 @@
 <?php
 namespace Serff\Cms\Modules\Custom\KabolaProductsModule\Services;
 
+/**
+ * Class FilterAdapter
+ *
+ * @package Serff\Cms\Modules\Custom\KabolaProductsModule\Services
+ */
 class FilterAdapter
 {
 
@@ -24,6 +29,35 @@ class FilterAdapter
         }
 
         return [];
+    }
+
+    /**
+     * @param array $appliance
+     *
+     * @return array
+     */
+    public static function transformAppliciance(array $appliance)
+    {
+        \Log::info($appliance);
+        if ((count($appliance) == 0)) {
+            return ['CV', 'BOILER', 'COMBI'];
+        }
+
+        if ((count($appliance) == 2)) {
+            return ['COMBI'];
+        }
+
+        $types = ['COMBI'];
+
+        foreach ($appliance as $item) {
+            if ($item == 'a') {
+                $types[] = 'CV';
+            } elseif ($item == 'b') {
+                $types[] = 'BOILER';
+            }
+        }
+
+        return $types;
     }
 
     /**

@@ -18,8 +18,14 @@ function get_latest_products($limit = 3, $as_array = false)
         return $items->toArray();
     }
 }
-    
 
+
+/**
+ * @param $attribute_id
+ * @param $product_attributes
+ *
+ * @return mixed|null
+ */
 function get_attribute_value($attribute_id, $product_attributes)
 {
     foreach($product_attributes as $attribute) {
