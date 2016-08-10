@@ -50,15 +50,39 @@ class MigrationManager
     {
         $files = $this->filesystem->files($path);
 
-        $ran = $this->repository->getRan();
-        
-        $migrations = array_diff($files, $ran);
+        $migration_files = array_map(function ($file) {
+            return \File::basename($file);
+        }, $files);
 
+        $ran = $this->repository->getRan();
+
+        $migration_items = array_diff($migration_files, $ran);
+
+        $migrations = $this->cleanUpMigrationFiles($files, $migration_items);
+        
         $this->requireFiles($migrations);
 
         $items = $this->getMigrationClasses($namespace, $migrations);
 
         return $items;
+    }
+
+    /**
+     * @param $files
+     * @param $migration_files
+     *
+     * @return array
+     */
+    protected function cleanUpMigrationFiles($files, $migration_files)
+    {
+        $migrations = array_map(function ($file) use ($migration_files) {
+            $filename = \File::basename($file);
+            if (in_array($filename, $migration_files)) {
+                return $file;
+            }
+        }, $files);
+
+        return array_filter($migrations, function($value) { return $value !== null; } );
     }
 
 
@@ -128,6 +152,9 @@ class MigrationManager
         }
     }
 
+    /**
+     * @param $migrations
+     */
     public function run($migrations)
     {
         $batch = $this->repository->getNextBatchNumber();
@@ -136,7 +163,7 @@ class MigrationManager
             $reflectionClass = new \ReflectionClass(get_class($migration));
             $file = $reflectionClass->getFileName();
             $migration->up();
-            $this->repository->log($file, $batch);
+            $this->repository->log(\File::basename($file), $batch);
         }
     }
 
