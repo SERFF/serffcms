@@ -21,5 +21,9 @@
     "psr-4": {
       "Serff\\Cms\\Tests\\": "tests/"
     }
+  },
+  "dist": {
+    "url": "git@bitbucket.org:serffnl/serffcms.git",
+    "type": "git"
   }
 }
