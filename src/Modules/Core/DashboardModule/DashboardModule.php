@@ -4,6 +4,11 @@ namespace Serff\Cms\Modules\Core\DashboardModule;
 use Serff\Cms\Contracts\ModuleContract;
 use Serff\Cms\Core\Modules\Module;
 
+/**
+ * Class DashboardModule
+ *
+ * @package Serff\Cms\Modules\Core\DashboardModule
+ */
 class DashboardModule extends Module implements ModuleContract
 {
     /**
@@ -15,12 +20,13 @@ class DashboardModule extends Module implements ModuleContract
         $this->path = __DIR__;
         $this->namespace = __NAMESPACE__;
     }
-    
+
+    /**
+     *
+     */
     public function boot()
     {
         parent::boot();
-
-        $this->buildMenu();
     }
 
     /**
@@ -31,15 +37,12 @@ class DashboardModule extends Module implements ModuleContract
         return true;
     }
 
+    /**
+     *
+     */
     public function update()
     {
         // TODO: Implement update() method.
     }
-
-    protected function buildMenu()
-    {
-       
-    }
-
 
 }
