@@ -26,9 +26,9 @@
         </div>
     </div>
     <div class="search">
-        <form method="get" id="searchform" action="">
+        <form method="get" id="searchform" action="{{ route('kabola.search') }}">
             <a href="" id="closesearch">x</a>
-            <input type="text" name="s" id="s" placeholder="Waar bent u naar op zoek?" value="">
+            <input type="text" name="s" id="s" placeholder="{!! translate('kabola.search.what_are_you_looking_for') !!}" value="">
             <input type="submit" value="`" class="Submit" name="submit">
         </form>
     </div>

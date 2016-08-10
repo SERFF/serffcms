@@ -136,5 +136,36 @@ class PagesRepository extends Repository
             ->first();
     }
 
+    /**
+     * @param $query
+     *
+     * @return Collection
+     */
+    public function search($query)
+    {
+        $pages_by_title = $this->searchColumn('title', $query);
+        $pages_by_content = $this->searchColumn('content', $query);
+        
+        return $pages_by_title->merge($pages_by_content);
+    }
+
+    /**
+     * @param $column
+     * @param $query
+     *
+     * @return Collection
+     */
+    protected function searchColumn($column, $query)
+    {
+        return $this->model
+            ->where($column, 'like', '%' . $query . '%')
+            ->where('status', Page::STATUS_PUBLISHED)
+            ->where('locale', app()->getLocale())
+            ->get()
+            ->map(function($item) {
+                $item->search_type = 'page';
+                return $item;
+            });
+    }
 
 }

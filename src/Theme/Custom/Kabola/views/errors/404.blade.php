@@ -10,7 +10,7 @@
     <div class="section wrapper">
         <h1>{!! translate('kabola.error.we_are_sorry') !!}</h1>
         <h2>{!! translate('kabola.error.we_could_not_find_the_page') !!} {!! translate('kabola.error.you_can_search') !!}</h2>
-        <form method="get" id="searchform">
+        <form method="get" id="searchform" action="{{ route('kabola.search') }}">
             <input type="text" size="40" value="" name="s" id="s">
             <input type="submit" id="searchsubmit" value="`">
         </form>

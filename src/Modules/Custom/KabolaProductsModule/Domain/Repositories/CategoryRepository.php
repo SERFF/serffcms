@@ -21,6 +21,11 @@ class CategoryRepository extends Repository
         $this->model = $category;
     }
 
+    /**
+     * @param $filters
+     *
+     * @return Category
+     */
     public function filtered($filters)
     {
         $models = $this->model;
@@ -36,7 +41,6 @@ class CategoryRepository extends Repository
         $models = $models->get();
 
         return $models;
-    }  
-    
-
+    }
+   
 }

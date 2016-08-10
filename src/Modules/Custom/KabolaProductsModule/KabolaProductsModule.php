@@ -4,10 +4,16 @@ namespace Serff\Cms\Modules\Custom\KabolaProductsModule;
 use Serff\Cms\Contracts\ModuleContract;
 use Serff\Cms\Core\Modules\Module;
 
+/**
+ * Class KabolaProductsModule
+ *
+ * @package Serff\Cms\Modules\Custom\KabolaProductsModule
+ */
 class KabolaProductsModule extends Module implements ModuleContract
 {
+
     /**
-     * Options constructor.
+     * KabolaProductsModule constructor.
      */
     public function __construct()
     {
@@ -16,6 +22,9 @@ class KabolaProductsModule extends Module implements ModuleContract
         $this->namespace = __NAMESPACE__;
     }
 
+    /**
+     *
+     */
     public function boot()
     {
         parent::boot();
@@ -33,11 +42,17 @@ class KabolaProductsModule extends Module implements ModuleContract
         return true;
     }
 
+    /**
+     *
+     */
     public function update()
     {
         // TODO: Implement update() method.
     }
 
+    /**
+     *
+     */
     protected function buildMenu()
     {
         $this->addAdminMenuGroup('products', [
