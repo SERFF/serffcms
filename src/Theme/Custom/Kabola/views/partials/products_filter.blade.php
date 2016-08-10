@@ -70,7 +70,7 @@
 		</li>
 	</ul>
 </span>
-<span id="efficiencewrapper">
+{{--<span id="efficiencewrapper">
 	<h3>{!! translate('kabola.products.efficiency') !!}</h3>
 	<ul>
 		<li>
@@ -82,7 +82,7 @@
 			<label for="25">94%</label>
 		</li>
 	</ul>
-</span>
+</span>--}}
 
 @section('scripts')
     @parent
