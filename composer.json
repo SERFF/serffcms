@@ -25,5 +25,7 @@
   "dist": {
     "url": "git@bitbucket.org:serffnl/serffcms.git",
     "type": "git"
-  }
+  },
+  "minimum-stability": "dev"
+  
 }
