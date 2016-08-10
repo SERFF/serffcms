@@ -21,11 +21,6 @@
     "psr-4": {
       "Serff\\Cms\\Tests\\": "tests/"
     }
-  },
-  "dist": {
-    "url": "git@bitbucket.org:serffnl/laravelcms.git",
-    "type": "git"
-  },
-  "minimum-stability": "dev"
+  }
   
 }
