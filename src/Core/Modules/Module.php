@@ -132,6 +132,9 @@ abstract class Module
                 
             }
             $primary_locale = get_option('primary_locale', app()->getLocale());
+            if(trim($site_locales) == '') {
+                $site_locales = [];
+            }
 
             foreach ($site_locales as $locale) {
                 $route_group_params = ['namespace' => $this->getNameSpace() . '\Http\Controllers', 'middleware' => 'web'];
