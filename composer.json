@@ -23,7 +23,7 @@
     }
   },
   "dist": {
-    "url": "git@bitbucket.org:serffnl/serffcms.git",
+    "url": "git@bitbucket.org:serffnl/laravelcms.git",
     "type": "git"
   },
   "minimum-stability": "dev"
