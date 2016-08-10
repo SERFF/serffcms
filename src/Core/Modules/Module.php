@@ -132,7 +132,7 @@ abstract class Module
                 
             }
             $primary_locale = get_option('primary_locale', app()->getLocale());
-            if(trim($site_locales) == '') {
+            if(!is_array($site_locales)) {
                 $site_locales = [];
             }
 
