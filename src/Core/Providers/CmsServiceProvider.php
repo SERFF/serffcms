@@ -143,7 +143,7 @@ class CmsServiceProvider extends ServiceProvider
 
         app()->singleton(
             \Illuminate\Contracts\Debug\ExceptionHandler::class,
-            \Serff\Cms\Exceptions\Handler::class
+            \Serff\Cms\Core\Exceptions\Handler::class
         );
     }
 

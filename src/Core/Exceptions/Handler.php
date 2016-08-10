@@ -1,6 +1,6 @@
 <?php
 
-namespace Serff\Cms\Exceptions;
+namespace Serff\Cms\Core\Exceptions;
 
 use Exception;
 use Illuminate\Validation\ValidationException;
