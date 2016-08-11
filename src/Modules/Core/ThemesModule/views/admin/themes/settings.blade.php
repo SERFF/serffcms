@@ -19,6 +19,9 @@
             <div class="col-md-12">
                 <div class="box box-info">
 
+                    <div class="box-header">
+                        <a href="{{ route('admin.theme.find') }}" class="btn btn-sm btn-primary pull-right">Find Themes</a>
+                    </div>
                     <div class="box-body">
                         @foreach($themes as $theme)
                             @if(array_get($theme, 'hidden')) @php continue; @endphp @endif

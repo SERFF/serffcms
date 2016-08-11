@@ -19,7 +19,6 @@ class Kabola extends Theme implements ThemeContract
 
     public function boot()
     {
-
         parent::boot();
         $this->registerTemplates();
     }

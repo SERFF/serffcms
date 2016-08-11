@@ -37,6 +37,14 @@ class Container
     }
 
     /**
+     * @param $themes
+     */
+    public function setThemes($themes)
+    {
+        $this->available_themes = $themes;
+    }
+
+    /**
      * @param Theme $theme
      */
     public function setActiveTheme(Theme $theme)

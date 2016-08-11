@@ -3,8 +3,15 @@ namespace Serff\Cms\Modules\Core\ThemesModule\Core;
 
 use ReflectionClass;
 use Serff\Cms\Core\Cms\Loader\Loader;
+use Serff\Cms\Modules\Core\ThemesModule\Cache\ThemesCacheManager;
 use Serff\Cms\Modules\Core\ThemesModule\Contracts\ThemeContract;
+use Symfony\Component\Finder\Finder;
 
+/**
+ * Class ThemeLoader
+ *
+ * @package Serff\Cms\Modules\Core\ThemesModule\Core
+ */
 class ThemeLoader
 {
     /**
@@ -16,6 +23,18 @@ class ThemeLoader
      * @var string
      */
     protected $selected_theme;
+    /**
+     * @var ThemesCacheManager
+     */
+    protected $cacheManager;
+
+    /**
+     * ThemeLoader constructor.
+     */
+    public function __construct()
+    {
+        $this->cacheManager = app(ThemesCacheManager::class);
+    }
 
     /**
      * Boot the ThemeLoader
@@ -36,7 +55,11 @@ class ThemeLoader
     {
         $reflector = new ReflectionClass(get_class($this));
         $themePath = str_replace('Modules/Core/ThemesModule/Core/ThemeLoader.php', 'Theme/', $reflector->getFileName());
-        $items = $this->loader->find('Serff\\Cms\\Theme', $themePath);
+        $items = array_merge(
+            $this->loader->find('Serff\\Cms\\Theme', $themePath),
+            $this->loader->find('App\\Themes', app_path('Themes'))
+        );
+
         foreach ($items as $item) {
             $this->registerTheme($item);
         }

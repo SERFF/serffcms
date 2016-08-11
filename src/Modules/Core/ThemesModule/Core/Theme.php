@@ -2,7 +2,6 @@
 namespace Serff\Cms\Modules\Core\ThemesModule\Core;
 
 use Illuminate\Support\Str;
-use Intervention\Image\Facades\Image;
 
 /**
  * Class Theme
@@ -19,6 +18,10 @@ abstract class Theme
      * @var string
      */
     protected $viewPath;
+    /**
+     * @var string
+     */
+    protected $assetsPath;
     /**
      * @var string
      */
@@ -63,6 +66,8 @@ abstract class Theme
         $path = $this->getViewPath();
         \View::addLocation($path);
         \View::addNamespace($this->getName(), $path);
+        
+        $this->checkAssetsSymlink();
         
         if (get_option('selected_theme', '') == get_class($this)) {
             app('Container')->setActiveTheme($this);
@@ -155,29 +160,6 @@ abstract class Theme
     /**
      * @return string
      */
-    public function getScreenShot()
-    {
-        if ($this->screen_shot === null) {
-            return 'https://placeholdit.imgix.net/~text?txtsize=33&txt=1024%C3%97768&w=1024&h=768';
-        }
-        /**
-         * @var Image $image
-         */
-        $image_path = public_path($this->screen_shot);
-        $image = Image::make($image_path);
-        if ($image->getWidth() > 600) {
-            $image->resize(600, null, function ($constraint) {
-                $constraint->aspectRatio();
-            });
-            $image->save($image_path, 90);
-        }
-
-        return $this->screen_shot;
-    }
-
-    /**
-     * @return string
-     */
     public function getDescription()
     {
         return $this->description;
@@ -215,4 +197,23 @@ abstract class Theme
         return $this->admin_wysiwyg_css;
     }
 
+    /**
+     * Create a symlink to assets if not found
+     */
+    protected function checkAssetsSymlink()
+    {
+        if(is_null($this->assetsPath)) {
+            return;
+        }
+        if(!\File::exists($this->assetsPath)) {
+            return;
+        }
+        
+        $dir_name = \File::basename($this->assetsPath);
+        $symlink_target = public_path('themes/' . $dir_name);
+        
+        if(!\File::exists($symlink_target)) {
+            symlink($this->assetsPath, $symlink_target);
+        }
+    }
 }

@@ -142,6 +142,9 @@ class ThemesModule extends Module implements ModuleContract
         $hook_key = 'pages.form';
         $sidebar_hook_key = 'pages.sidebar.form';
 
+        /**
+         * Register hook for pages form sidebar - set template
+         */
         \Hook::registerFormHook($sidebar_hook_key, function ($record = [], $type) {
             $active_theme = ThemeView::getActiveTheme();
 
@@ -151,6 +154,9 @@ class ThemesModule extends Module implements ModuleContract
             ]);
         });
 
+        /**
+         * Register hook for pages submit - save selected template
+         */
         \Hook::registerFormSubmit($hook_key, function ($request, $record) {
             /**
              * @var Request $request
@@ -166,5 +172,10 @@ class ThemesModule extends Module implements ModuleContract
     public static function getActiveTheme()
     {
         return get_option('selected_theme');
+    }
+    
+    public function getRegisteredThemes()
+    {
+        
     }
 }

@@ -1,10 +1,10 @@
 <?php
 namespace Serff\Cms\Modules\Core\ThemesModule\Http\Controllers\Admin;
 
-use Serff\Cms\Core\Common\ScreenShot\ScreenShot;
 use Serff\Cms\Core\Controllers\Controller;
 use Serff\Cms\Modules\Core\PagesModule\Domain\Repositories\PagesRepository;
 use Serff\Cms\Modules\Core\ThemesModule\Core\Theme;
+use Serff\Cms\Modules\Core\ThemesModule\Core\ThemeLoader;
 use Serff\Cms\Modules\Core\ThemesModule\Core\ThemeView;
 use Serff\Cms\Modules\Core\ThemesModule\ThemesModule;
 use DataUtil;
@@ -18,6 +18,20 @@ use Illuminate\Http\Request;
  */
 class ThemeController extends Controller
 {
+    /**
+     * @var ThemeLoader
+     */
+    protected $themeLoader;
+
+    /**
+     * ThemeController constructor.
+     *
+     * @param ThemeLoader $themeLoader
+     */
+    public function __construct(ThemeLoader $themeLoader)
+    {
+        $this->themeLoader = $themeLoader;
+    }
     /**
      * @return \Illuminate\Contracts\View\View
      */
@@ -104,5 +118,10 @@ class ThemeController extends Controller
         }
 
         return $pages;
+    }
+
+    public function getFind()
+    {
+        return redirect()->route('admin.theme.settings');
     }
 }
