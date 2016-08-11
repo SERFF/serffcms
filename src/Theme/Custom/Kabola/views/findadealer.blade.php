@@ -25,6 +25,20 @@
             float: left;
             width: 100%;
         }
+
+        .gm-style-iw {
+            width: 350px !important;
+            top: 0 !important;
+            left: 0 !important;
+            border-radius: 2px 2px 0 0;
+            max-height:200px;
+        }
+        .marker-info {
+            height: 100% !important;
+            left: 2px !important;;
+            top: 1px !important;;
+            width: 250px !important;
+        }
     </style>
 @endsection
 @section('content')
@@ -176,6 +190,6 @@
     </script>
 
     <script
-            src="https://maps.googleapis.com/maps/api/js?key={{ get_option('kabola_dealers.google_maps_js_api_key', '') }}&libraries=places&callback=initAutocomplete&language={{ app()->getLocale() }}&region={{ strtoupper(app()->getLocale()) }}"
+            src="https://maps.googleapis.com/maps/api/js?v=3.20&key={{ get_option('kabola_dealers.google_maps_js_api_key', '') }}&libraries=places&callback=initAutocomplete&language={{ app()->getLocale() }}&region={{ strtoupper(app()->getLocale()) }}"
             async defer></script>
 @endsection
