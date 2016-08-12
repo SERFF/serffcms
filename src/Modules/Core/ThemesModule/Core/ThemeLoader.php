@@ -54,8 +54,31 @@ class ThemeLoader
         }
 
         if (app(Container::class)->getActiveTheme() === null) {
-            $this->registerTheme(reset($items), true);
+            $this->registerTheme($this->getFirstActiveThemeFromArray($items), true);
         }
+    }
+
+    /**
+     * @param $items
+     *
+     * @return null|ReflectionClass
+     */
+    protected function getFirstActiveThemeFromArray($items)
+    {
+        foreach ($items as $class) {
+            /**
+             * @var Theme $Theme
+             * @var \ReflectionClass $class
+             */
+            if ($class->implementsInterface(ThemeContract::class)) {
+                $Theme = $class->newInstance();
+                if ($Theme->getHidden() === false) {
+                    return $class;
+                }
+            }
+        }
+
+        return null;
     }
 
     /**
@@ -88,6 +111,7 @@ class ThemeLoader
 
     /**
      * @param \ReflectionClass $class
+     * @param bool $overrule
      */
     protected function registerTheme(\ReflectionClass $class, $overrule = false)
     {
