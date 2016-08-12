@@ -4,6 +4,7 @@ namespace Serff\Cms\Modules\Custom\KabolaProductsModule\Http\Controllers;
 use Illuminate\Http\Request;
 use Serff\Cms\Core\Controllers\Controller;
 use Serff\Cms\Modules\Core\ThemesModule\Core\ThemeView;
+use Serff\Cms\Modules\Custom\KabolaProductsModule\Services\FilterAdapter;
 use Serff\Cms\Modules\Custom\KabolaProductsModule\Services\FilterService;
 
 /**
@@ -28,15 +29,23 @@ class ConfiguratorController extends Controller
     public function postCalculate(Request $request)
     {
         $data = [
-            'application'      => $request->get('application'),
-            'heating_m3'       => $request->get('heating_m3'),
-            'isolation'        => $request->get('isolation'),
-            'application_area' => $request->get('application_area'),
+            'application'      => $request->get('application', []),
+            'heating_m3'       => $request->get('heating_m3', []),
+            'isolation'        => $request->get('isolation', []),
+            'application_area' => $request->get('application_area', []),
         ];
-
+        $kw = array_get($data, 'heating_m3') *  (float)(array_get($data, 'isolation', 120) / 100);
+        $filters = [
+            'option_products' => $request->get('option_products', []),
+            'water_cb'        => [],
+            'capacity'        => FilterAdapter::transformCapacityValueToSelectItem($kw),
+            'appliance'       => $request->get('appliciance', []),
+        ];
+        $this->storeProductFilterSessionData($filters);
+        
         $this->storeSessionData($data);
 
-        return redirect()->route('configurator.overview');
+        return redirect()->route('page', ['slug' => 'producten']);
     }
 
 
@@ -48,14 +57,14 @@ class ConfiguratorController extends Controller
     public function postFiltered(Request $request)
     {
         $filters = [
-            'application'      => $request->get('application'),
+            'application'      => $request->get('application', []),
             'heating_m3'       => $request->get('heating_m3'),
             'isolation'        => $request->get('isolation'),
             'application_area' => $request->get('application_area'),
         ];
 
         $filters = $this->handleFilters($filters);
-        \Log::info($filters);
+        
         $this->storeSessionData($filters);
 
         $categories = app(FilterService::class)->filtered($filters);
@@ -76,6 +85,16 @@ class ConfiguratorController extends Controller
     protected function storeSessionData($data)
     {
         \Session::put('configurator_filter', $data);
+    }
+
+    /**
+     * Store the session request data for tailor made suggestions
+     *
+     * @param $data
+     */
+    protected function storeProductFilterSessionData($data)
+    {
+        \Session::set('product_filter', $data);
     }
 
     protected function handleFilters($filters)

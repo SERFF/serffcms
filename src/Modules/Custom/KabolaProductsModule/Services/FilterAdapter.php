@@ -1,6 +1,7 @@
 <?php
 namespace Serff\Cms\Modules\Custom\KabolaProductsModule\Services;
 
+
 /**
  * Class FilterAdapter
  *
@@ -120,6 +121,26 @@ class FilterAdapter
             'min' => $min,
             'max' => $max,
         ];
+    }
+
+    /**
+     * @param $value
+     *
+     * @return string
+     */
+    public static function transformCapacityValueToSelectItem($value)
+    {
+        if ($value < 10) {
+            return 'a';
+        }
+        if ($value < 19) {
+            return 'b';
+        }
+        if ($value < 29) {
+            return 'c';
+        }
+
+        return 'd';
     }
 
     /**
