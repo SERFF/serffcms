@@ -45,17 +45,45 @@ class ThemeLoader
         $reflector = new ReflectionClass(get_class($this));
         $themePath = str_replace('Modules/Core/ThemesModule/Core/ThemeLoader.php', 'Theme/', $reflector->getFileName());
         $items = array_merge(
-            $this->loader->find('Serff\\Cms\\Theme', $themePath),
-            $this->loader->find('App\\Themes', app_path('Themes'))
+            $this->getCmsThemes($themePath),
+            $this->getLocalThemes(app_path('Themes'))
         );
 
         foreach ($items as $item) {
             $this->registerTheme($item);
         }
-        
+
         if (app(Container::class)->getActiveTheme() === null) {
             $this->registerTheme(reset($items), true);
         }
+    }
+
+    /**
+     * @param $path
+     *
+     * @return array
+     */
+    protected function getLocalThemes($path)
+    {
+        if (\File::exists($path)) {
+            return $this->loader->find('App\\Themes', $path);
+        }
+
+        return [];
+    }
+
+    /**
+     * @param $path
+     *
+     * @return array
+     */
+    protected function getCmsThemes($path)
+    {
+        if (\File::exists($path)) {
+            return $this->loader->find('Serff\\Cms\\Theme', $path);
+        }
+
+        return [];
     }
 
     /**
@@ -76,11 +104,10 @@ class ThemeLoader
             if (($class->getName() === $this->selected_theme)) {
                 $Theme->boot();
             }
-            if($overrule) {
+            if ($overrule) {
                 $Theme->boot();
                 set_option('selected_theme', get_class($Theme));
             }
-            
 
         }
     }
