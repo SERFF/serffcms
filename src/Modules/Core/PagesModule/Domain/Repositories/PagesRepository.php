@@ -34,6 +34,20 @@ class PagesRepository extends Repository
     }
 
     /**
+     * @param $limit
+     * @param null $locale
+     *
+     * @return mixed
+     */
+    public function getRandomItems($limit, $locale = null)
+    {
+        if($locale === null) {
+            $locale = app()->getLocale();
+        }
+        return $this->model->where('locale', $locale)->inRandomOrder()->limit($limit)->get();
+    }
+
+    /**
      * @param $data
      *
      * @return static
@@ -145,7 +159,7 @@ class PagesRepository extends Repository
     {
         $pages_by_title = $this->searchColumn('title', $query);
         $pages_by_content = $this->searchColumn('content', $query);
-        
+
         return $pages_by_title->merge($pages_by_content);
     }
 
@@ -162,8 +176,9 @@ class PagesRepository extends Repository
             ->where('status', Page::STATUS_PUBLISHED)
             ->where('locale', app()->getLocale())
             ->get()
-            ->map(function($item) {
+            ->map(function ($item) {
                 $item->search_type = 'page';
+
                 return $item;
             });
     }

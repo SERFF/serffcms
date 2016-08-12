@@ -7,10 +7,10 @@
  *
  * @return mixed
  */
-function get_latest_products($limit = 3, $as_array = false)
+function get_random_products($limit = 3, $as_array = false)
 {
     $repo = app(\Serff\Cms\Modules\Custom\KabolaProductsModule\Domain\Repositories\ProductRepository::class);
-    $items = $repo->getLatestItems($limit);
+    $items = $repo->getRandomItems($limit);
 
     if (!$as_array) {
         return $items;

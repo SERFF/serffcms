@@ -27,9 +27,9 @@ class ProductRepository extends Repository
      *
      * @return mixed
      */
-    public function getLatestItems($limit = 3)
+    public function getRandomItems($limit = 3)
     {
-        return $this->model->limit($limit)->get();
+        return $this->model->with(['category'])->inRandomOrder()->limit($limit)->get();
     }
 
     /**
