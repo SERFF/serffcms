@@ -3,6 +3,7 @@ namespace Serff\Cms\Modules\Core\ThemesModule\Core;
 
 use ReflectionClass;
 use Serff\Cms\Core\Cms\Loader\Loader;
+use Serff\Cms\Core\Container\Container;
 use Serff\Cms\Modules\Core\ThemesModule\Cache\ThemesCacheManager;
 use Serff\Cms\Modules\Core\ThemesModule\Contracts\ThemeContract;
 use Symfony\Component\Finder\Finder;
@@ -23,18 +24,6 @@ class ThemeLoader
      * @var string
      */
     protected $selected_theme;
-    /**
-     * @var ThemesCacheManager
-     */
-    protected $cacheManager;
-
-    /**
-     * ThemeLoader constructor.
-     */
-    public function __construct()
-    {
-        $this->cacheManager = app(ThemesCacheManager::class);
-    }
 
     /**
      * Boot the ThemeLoader
@@ -63,12 +52,16 @@ class ThemeLoader
         foreach ($items as $item) {
             $this->registerTheme($item);
         }
+        
+        if (app(Container::class)->getActiveTheme() === null) {
+            $this->registerTheme(reset($items), true);
+        }
     }
 
     /**
      * @param \ReflectionClass $class
      */
-    protected function registerTheme(\ReflectionClass $class)
+    protected function registerTheme(\ReflectionClass $class, $overrule = false)
     {
         if ($class->implementsInterface(ThemeContract::class)) {
             /**
@@ -80,9 +73,14 @@ class ThemeLoader
             /**
              * Load the theme which is selected
              */
-            if ($class->getName() === $this->selected_theme) {
+            if (($class->getName() === $this->selected_theme)) {
                 $Theme->boot();
             }
+            if($overrule) {
+                $Theme->boot();
+                set_option('selected_theme', get_class($Theme));
+            }
+            
 
         }
     }

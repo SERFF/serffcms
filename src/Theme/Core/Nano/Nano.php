@@ -12,7 +12,9 @@ class Nano extends Theme implements ThemeContract
         $this->author = 'SERFF';
         $this->viewPath = __DIR__ . '/views';
         $this->description = 'Standaard thema van het SERFF CMS';
-        $this->hidden = true;
+        $this->hidden = env('NANO_HIDDEN', true);
+        $this->viewPath = __DIR__ . '/views';
+        $this->assetsPath = __DIR__ . '/assets/nano';
     }
 
     public function boot()

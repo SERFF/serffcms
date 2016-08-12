@@ -2,6 +2,7 @@
 namespace Serff\Cms\Modules\Core\ThemesModule\Core;
 
 use Illuminate\Support\Str;
+use Intervention\Image\Facades\Image;
 
 /**
  * Class Theme
@@ -155,6 +156,29 @@ abstract class Theme
         }
 
         return $this->author_image_path;
+    }
+
+    /**
+     * @return string
+     */
+    public function getScreenShot()
+    {
+        if ($this->screen_shot === null) {
+            return 'https://placeholdit.imgix.net/~text?txtsize=33&txt=1024%C3%97768&w=1024&h=768';
+        }
+        /**
+         * @var Image $image
+         */
+        $image_path = public_path($this->screen_shot);
+        $image = Image::make($image_path);
+        if ($image->getWidth() > 600) {
+            $image->resize(600, null, function ($constraint) {
+                $constraint->aspectRatio();
+            });
+            $image->save($image_path, 90);
+        }
+
+        return $this->screen_shot;
     }
 
     /**

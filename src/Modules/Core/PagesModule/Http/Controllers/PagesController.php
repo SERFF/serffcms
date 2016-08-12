@@ -60,7 +60,7 @@ class PagesController extends Controller
         if ($page->slug !== $slug) {
             return redirect()->route('page', ['slug' => $page->slug]);
         }
-
+        
         return ThemeView::getView($this->getTemplateView($page), [
             'page' => $page->toArray(),
             'menu' => $this->getMenu(),
