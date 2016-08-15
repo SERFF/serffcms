@@ -236,7 +236,7 @@ abstract class Theme
         $dir_name = \File::basename($this->assetsPath);
         $symlink_target = public_path('themes/' . $dir_name);
         
-        if(!\File::exists($symlink_target)) {
+        if((!\File::exists($symlink_target)) && (\File::exists($this->assetsPath))) {
             symlink($this->assetsPath, $symlink_target);
         }
     }
