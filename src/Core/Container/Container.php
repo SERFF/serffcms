@@ -21,6 +21,11 @@ class Container
     protected $active_theme;
 
     /**
+     * @var array
+     */
+    protected $middlewares = [];
+
+    /**
      * @param Theme $theme
      */
     public function addTheme($theme)
@@ -58,6 +63,22 @@ class Container
     public function getActiveTheme()
     {
         return $this->active_theme;
+    }
+
+    /**
+     * @param $middleware
+     */
+    public function addMiddleware($middleware)
+    {
+        $this->middlewares[] = $middleware;
+    }
+
+    /**
+     * @return array
+     */
+    public function getMiddlewares()
+    {
+        return $this->middlewares;
     }
 
 }

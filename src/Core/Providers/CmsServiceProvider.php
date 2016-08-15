@@ -14,6 +14,7 @@ use Serff\Cms\Core\Facades\Hook;
 use Serff\Cms\Core\Navigation\AdminMenu;
 use Illuminate\Filesystem\Filesystem;
 use Serff\Cms\Modules\Core\UsersModule\Domain\Models\User\User;
+use Illuminate\Contracts\Http\Kernel as HttpKernel;
 
 /**
  * Class CmsServiceProvider
@@ -52,8 +53,7 @@ class CmsServiceProvider extends ServiceProvider
         $this->loader = app()->make(Loader::class);
         $this->registerContainer();
         $this->registerModules();
-        $this->registerValidations();
-
+        $this->registerMiddlewares();
     }
 
     /**
@@ -120,13 +120,6 @@ class CmsServiceProvider extends ServiceProvider
     }
 
     /**
-     * Register custom validations
-     */
-    protected function registerValidations()
-    {
-    }
-
-    /**
      * Overwrite standard Laravel kernels
      */
     protected function setKernel()
@@ -184,8 +177,23 @@ class CmsServiceProvider extends ServiceProvider
             ->load($providers);
     }
 
+    /**
+     *
+     */
     protected function registerAuthUser()
     {
         app('config')->set(['auth.providers.users.model' => User::class]);
+    }
+
+    /**
+     * Register middlewares to group
+     *
+     * @param string $group
+     */
+    protected function registerMiddlewares($group = 'web')
+    {
+        foreach (app('Container')->getMiddlewares() as $middleware) {
+            app('router')->pushMiddlewareToGroup($group, $middleware);
+        }
     }
 }

@@ -193,7 +193,7 @@ abstract class Module
      */
     protected function registerMiddleware($middleware)
     {
-        $this->httpKernel->pushMiddleware($middleware);
+        app('Container')->addMiddleware($middleware);
     }
 
 }
