@@ -67,9 +67,9 @@ abstract class Theme
         $path = $this->getViewPath();
         \View::addLocation($path);
         \View::addNamespace($this->getName(), $path);
-        
+
         $this->checkAssetsSymlink();
-        
+
         if (get_option('selected_theme', '') == get_class($this)) {
             app('Container')->setActiveTheme($this);
         }
@@ -130,8 +130,8 @@ abstract class Theme
      */
     public function getTemplateData($slug)
     {
-        foreach($this->templates as $template) {
-            if(array_get($template, 'slug') == $slug) {
+        foreach ($this->templates as $template) {
+            if (array_get($template, 'slug') == $slug) {
                 return $template;
             }
         }
@@ -226,17 +226,19 @@ abstract class Theme
      */
     protected function checkAssetsSymlink()
     {
-        if(is_null($this->assetsPath)) {
+        if (is_null($this->assetsPath)) {
             return;
         }
-        if(!\File::exists($this->assetsPath)) {
+        if (!\File::exists($this->assetsPath)) {
             return;
         }
-        
+
         $dir_name = \File::basename($this->assetsPath);
         $symlink_target = public_path('themes/' . $dir_name);
-        
-        if((!\File::exists($symlink_target)) && (\File::exists($this->assetsPath))) {
+        if (!\File::exists(public_path('themes/'))) {
+            \File::makeDirectory(public_path('themes/'));
+        }
+        if ((!\File::exists($symlink_target)) && (\File::exists($this->assetsPath))) {
             symlink($this->assetsPath, $symlink_target);
         }
     }
