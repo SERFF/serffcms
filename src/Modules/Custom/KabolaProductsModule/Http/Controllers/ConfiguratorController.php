@@ -34,15 +34,16 @@ class ConfiguratorController extends Controller
             'isolation'        => $request->get('isolation', []),
             'application_area' => $request->get('application_area', []),
         ];
-        $kw = array_get($data, 'heating_m3') *  (float)(array_get($data, 'isolation', 120) / 100);
+        $kw = array_get($data, 'heating_m3') * (float)(array_get($data, 'isolation', 120) / 100);
         $filters = [
-            'option_products' => $request->get('option_products', []),
+            'option_products' => [],
             'water_cb'        => [],
             'capacity'        => FilterAdapter::transformCapacityValueToSelectItem($kw),
-            'appliance'       => $request->get('appliciance', []),
+            'appliance'       => FilterAdapter::transformApplicationToAppliance(array_get($data, 'application', [])),
         ];
-        $this->storeProductFilterSessionData($filters);
         
+        $this->storeProductFilterSessionData($filters);
+
         $this->storeSessionData($data);
 
         return redirect()->route('page', ['slug' => 'producten']);
@@ -64,7 +65,7 @@ class ConfiguratorController extends Controller
         ];
 
         $filters = $this->handleFilters($filters);
-        
+
         $this->storeSessionData($filters);
 
         $categories = app(FilterService::class)->filtered($filters);

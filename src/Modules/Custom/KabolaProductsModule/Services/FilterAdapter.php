@@ -32,6 +32,23 @@ class FilterAdapter
         return [];
     }
 
+    public static function transformApplicationToAppliance(array $data)
+    {
+        $options = [];
+        foreach ($data as $value) {
+            switch ($value) {
+                case 'centralheating':
+                    $options[] = 'a';
+                    break;
+                case 'hotwater':
+                    $options[] = 'b';
+                    break;
+            }
+        }
+
+        return $options;
+    }
+
     /**
      * @param array $appliance
      *
