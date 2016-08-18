@@ -164,8 +164,11 @@ class FilterAdapter
 		if ($value < 29) {
 			return 'c';
 		}
+		if($value > 60) {
+			return 'd';
+		}
 
-		return 'd';
+		return 'e';
 	}
 
 	/**
@@ -196,8 +199,12 @@ class FilterAdapter
 					$max = array_get(self::getMinMax($min, $max, 20, 29), 'max');
 					break;
 				case 'd':
-					$min = array_get(self::getMinMax($min, $max, 30, 116), 'min');
-					$max = array_get(self::getMinMax($min, $max, 30, 116), 'max');
+					$min = array_get(self::getMinMax($min, $max, 30, 60), 'min');
+					$max = array_get(self::getMinMax($min, $max, 30, 60), 'max');
+					break;
+				case 'e':
+					$min = array_get(self::getMinMax($min, $max, 61, 999), 'min');
+					$max = array_get(self::getMinMax($min, $max, 61, 999), 'max');
 					break;
 			}
 		}
