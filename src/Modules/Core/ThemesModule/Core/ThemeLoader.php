@@ -42,7 +42,7 @@ class ThemeLoader
      */
     protected function registerThemes()
     {
-    	if(env('INSTALLED', false) !== false) {
+    	if(env('INSTALLED', false) == false) {
     		return;
 	    }
         $reflector = new ReflectionClass(get_class($this));

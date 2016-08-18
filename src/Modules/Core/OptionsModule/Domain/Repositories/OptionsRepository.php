@@ -39,7 +39,7 @@ class OptionsRepository extends Repository
      */
     public function setOption($key, $value)
     {
-    	if(env('INSTALLED', false) !== false) {
+    	if(env('INSTALLED', false) == false) {
     		return null;
     	}
         $option = $this->getOption($key);
