@@ -49,7 +49,8 @@ class Dealer extends Model
         'emergency_phone',
         'latitude',
         'longitude',
-        'distance'
+        'distance',
+        'id'
     ];
 
 }

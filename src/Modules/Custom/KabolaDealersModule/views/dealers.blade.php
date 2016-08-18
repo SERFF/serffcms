@@ -4,6 +4,7 @@
             <h3>{{ $dealer->name }}</h3>
             <span class="adres">{{ $dealer->street }}</span>
             <span class="adres2">{{ $dealer->postcode }} {{ $dealer->city }}</span>
+            <span class="adres2">{{ $dealer->country }}</span>
             <span class="telephone">{{ $dealer->phone }}</span>
             <span class="emergencyline">{{ $dealer->emergency_phone }}</span>
         </a>

@@ -19,14 +19,13 @@ class DealerObserver
     {
         if($model->latitude == null) {
             $dealer = $model->toArray();
-            $query = sprintf('%s %s %s %s', array_get($dealer, 'street'), str_replace(' ', '', array_get($dealer, 'postcode'))  , array_get($dealer, 'city'), array_get($dealer, 'country'));
+            $query = sprintf('%s, %s, %s', array_get($dealer, 'street')  , array_get($dealer, 'city'), array_get($dealer, 'country'));
             $result = null;
             try {
                 $result = $this->geocoder->geocode($query);
             } catch (\Exception $e) {
-
+				dd($query, $e);
             }
-            
             
             if($result === null) {
                 return;

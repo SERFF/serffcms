@@ -65,7 +65,8 @@ class DealersController extends Controller
     public function postStore(DealerRequest $request)
     {
         $data = array_except($request->all(), ['_token']);
-        if (is_numeric(array_get($data, 'id'))) {
+        
+	    if (is_numeric(array_get($data, 'id'))) {
             $this->dealerRepository->update(array_get($data, 'id'), $data);
             $dealer = $this->dealerRepository->getById(array_get($data, 'id'));
         } else {
