@@ -39,8 +39,11 @@ class OptionsRepository extends Repository
      */
     public function setOption($key, $value)
     {
+    	if(env('INSTALLED', false) !== false) {
+    		return null;
+    	}
         $option = $this->getOption($key);
-        if (($option !== null) && (env('INSTALLED', false) !== false)) {
+        if ($option !== null) {
             $option->update(['value' => $value]);
         } else {
             $option = $this->model->create(['name' => $key, 'value' => $value]);
