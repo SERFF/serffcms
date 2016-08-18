@@ -55,6 +55,9 @@ class OptionsModule extends Module implements ModuleContract
      */
     public static function getOption($key, $default = '')
     {
+    	if(env('INSTALLED', false) == false) {
+    		return $default;
+	    }
         $cacheManager = app(OptionCacheManager::class);
 
         return $cacheManager->rememberOption($key, function () use ($key, $default) {
