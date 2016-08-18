@@ -42,6 +42,9 @@ class ThemeLoader
      */
     protected function registerThemes()
     {
+    	if(env('INSTALLED', false) !== false) {
+    		return;
+	    }
         $reflector = new ReflectionClass(get_class($this));
         $themePath = str_replace('Modules/Core/ThemesModule/Core/ThemeLoader.php', 'Theme/', $reflector->getFileName());
         $items = array_merge(
