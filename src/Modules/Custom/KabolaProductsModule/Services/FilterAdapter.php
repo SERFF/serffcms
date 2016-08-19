@@ -164,8 +164,11 @@ class FilterAdapter
 		if ($value < 29) {
 			return 'c';
 		}
+        if ($value < 60) {
+            return 'd';
+        }
 		if($value > 60) {
-			return 'd';
+			return 'e';
 		}
 
 		return 'e';
