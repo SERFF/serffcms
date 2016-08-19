@@ -34,7 +34,7 @@ class ConfiguratorController extends Controller
             'isolation'        => $request->get('isolation', []),
             'application_area' => $request->get('application_area', []),
         ];
-        $kw = array_get($data, 'heating_m3') * (float)(array_get($data, 'isolation', 120) / 100);
+        $kw = array_get($data, 'heating_m3') * (float)(array_get($data, 'isolation', 120) / 1000);
         $filters = [
             'option_products' => [],
             'water_cb'        => [],
