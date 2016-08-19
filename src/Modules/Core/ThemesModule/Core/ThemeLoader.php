@@ -56,7 +56,7 @@ class ThemeLoader
             $this->registerTheme($item);
         }
 
-        if (app(Container::class)->getActiveTheme() === null) {
+        if (app('Container')->getActiveTheme() === null) {
             $this->registerTheme($this->getFirstActiveThemeFromArray($items), true);
         }
     }
