@@ -50,6 +50,11 @@
     {!! Form::select('attribute_groups[]', array_pluck($attribute_groups, 'name', 'id'), array_pluck($selected_attribute_groups, 'id'), ['class' => 'form-control select2element', 'multiple' => 'multiple']) !!}
 </div>
 
+<div class="form-group">
+    <label for="style_class">Style class</label>
+    {!! Form::text('style_class', array_get($category, 'style_class'), ['class' => 'form-control', 'id' => 'style_class']) !!}
+</div>
+
 @section('scripts')
     @parent
     <script src="{{ asset('/plugins/select2/select2.min.js') }}"></script>

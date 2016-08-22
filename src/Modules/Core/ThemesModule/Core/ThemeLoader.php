@@ -3,10 +3,7 @@ namespace Serff\Cms\Modules\Core\ThemesModule\Core;
 
 use ReflectionClass;
 use Serff\Cms\Core\Cms\Loader\Loader;
-use Serff\Cms\Core\Container\Container;
-use Serff\Cms\Modules\Core\ThemesModule\Cache\ThemesCacheManager;
 use Serff\Cms\Modules\Core\ThemesModule\Contracts\ThemeContract;
-use Symfony\Component\Finder\Finder;
 
 /**
  * Class ThemeLoader

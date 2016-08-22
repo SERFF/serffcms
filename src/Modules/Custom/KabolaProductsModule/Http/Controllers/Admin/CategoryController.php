@@ -36,10 +36,11 @@ class CategoryController extends Controller
      * @param MediaRepository $mediaRepository
      * @param AttributeGroupRepository $attributeGroupRepository
      */
-    public function __construct(CategoryRepository $categoryRepository,
-                                MediaRepository $mediaRepository,
-                                AttributeGroupRepository $attributeGroupRepository)
-    {
+    public function __construct(
+        CategoryRepository $categoryRepository,
+        MediaRepository $mediaRepository,
+        AttributeGroupRepository $attributeGroupRepository
+    ) {
         $this->categoryRepository = $categoryRepository;
         $this->mediaRepository = $mediaRepository;
         $this->attributeGroupRepository = $attributeGroupRepository;
@@ -125,6 +126,7 @@ class CategoryController extends Controller
             'intro_text'            => $request->get('intro_text'),
             'product_content'       => $request->get('product_content'),
             'overview_preview_text' => $request->get('overview_preview_text'),
+            'style_class'           => $request->get('style_class'),
         ];
 
         if (is_numeric($category_id)) {
@@ -137,7 +139,8 @@ class CategoryController extends Controller
 
         $ids = [];
         foreach ($request->get('attribute_groups', []) as $group_id) {
-            $ids = array_merge($this->attributeGroupRepository->getById($group_id)->attributes()->get()->pluck('id')->toArray(), $ids);
+            $ids = array_merge($this->attributeGroupRepository->getById($group_id)->attributes()->get()->pluck('id')->toArray(),
+                $ids);
         }
         $ids = array_unique($ids);
         $category->attributes()->sync($ids);
@@ -148,7 +151,8 @@ class CategoryController extends Controller
             abort(500);
         }
 
-        set_meta_value(array_get($category->toArray(), 'id'), 'category', 'product_gallery', serialize(collect($items)));
+        set_meta_value(array_get($category->toArray(), 'id'), 'category', 'product_gallery',
+            serialize(collect($items)));
 
         return redirect()->route('admin.products.categories.edit', ['id' => $category->id]);
     }
