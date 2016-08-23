@@ -18,6 +18,10 @@ use Serff\Cms\Theme\Core\Nano\Nano;
 class InstallationServiceProvider extends ServiceProvider
 {
     /**
+     * @var bool
+     */
+    protected $defer = true;
+    /**
      * @var Installer
      */
     protected $installer;

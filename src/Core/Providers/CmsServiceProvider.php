@@ -14,7 +14,6 @@ use Serff\Cms\Core\Facades\Hook;
 use Serff\Cms\Core\Navigation\AdminMenu;
 use Illuminate\Filesystem\Filesystem;
 use Serff\Cms\Modules\Core\UsersModule\Domain\Models\User\User;
-use Illuminate\Contracts\Http\Kernel as HttpKernel;
 
 /**
  * Class CmsServiceProvider
