@@ -30,9 +30,9 @@ class NavigationMacro
      */
     public function __toString()
     {
-        $html = [];
+        $html   = [];
         $html[] = '<ul class="sidebar-menu">';
-        $html = array_merge($html, $this->buildMenu(\Request::getUri()));
+        $html   = array_merge($html, $this->buildMenu(\Request::getUri()));
         $html[] = '</ul>';
 
         return implode("\n", $html);
@@ -43,14 +43,14 @@ class NavigationMacro
      */
     protected function buildMenu($current_url)
     {
-        $items = app('AdminMenu')->getMenu();
-        $html = [];
+        $items  = app('AdminMenu')->getMenu();
+        $html   = [];
         $html[] = sprintf("<li class=\"header\">%s</li>", trans('admin/navigation.title'));
         foreach ($items as $main_item) {
             $submenu_items = array_get($main_item, 'items');
-            $active_item = $this->hasActiveSubItem($submenu_items, $current_url);
-            $expander = count($submenu_items) > 0 ? "<i class=\"fa fa-angle-left pull-right\"></i>" : "";
-            $html[] = sprintf("<li class='treeview %s'><a href=\"%s\"><i class='fa %s'></i> <span>%s</span>%s</a>",
+            $active_item   = $this->hasActiveSubItem($submenu_items, $current_url);
+            $expander      = count($submenu_items) > 0 ? "<i class=\"fa fa-angle-left pull-right\"></i>" : "";
+            $html[]        = sprintf("<li class='treeview %s'><a href=\"%s\"><i class='fa %s'></i> <span>%s</span>%s</a>",
                 $active_item === true ? 'active' : '',
                 array_get($main_item, 'link', '#'),
                 array_get($main_item, 'icon'),
