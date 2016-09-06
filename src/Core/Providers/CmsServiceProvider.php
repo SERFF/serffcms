@@ -60,12 +60,20 @@ class CmsServiceProvider extends ServiceProvider
      */
     public function registerModules()
     {
-        $namespace = 'Serff\Cms\Modules';
-        $reflector = new ReflectionClass(get_class($this));
+        $namespace  = 'Serff\Cms\Modules';
+        $reflector  = new ReflectionClass(get_class($this));
         $modulePath = str_replace('Core/Providers/CmsServiceProvider.php', 'Modules/', $reflector->getFileName());
 
-        $items = $this->loader->find($namespace, $modulePath);
+        $items2           = [];
+        $modulePathCustom = app_path('Modules');
+        $modulesNamespace = 'App\Modules';
 
+        $items = $this->loader->find($namespace, $modulePath);
+        if (\File::exists($modulePathCustom)) {
+            $items2 = $this->loader->find($modulesNamespace, $modulePathCustom);
+        }
+
+        $items = array_merge($items, $items2);
         foreach ($items as $class) {
             $this->loadModule($class);
         }
