@@ -55,9 +55,9 @@ abstract class Module
     public function __construct()
     {
         $this->migrationManager = App::make(MigrationManager::class);
-        $this->adminMenu = app('AdminMenu');
-        $this->consoleKernel = app()->make(Kernel::class);
-        $this->httpKernel = app(HttpKernel::class);
+        $this->adminMenu        = app('AdminMenu');
+        $this->consoleKernel    = app()->make(Kernel::class);
+        $this->httpKernel       = app(HttpKernel::class);
     }
 
     public function install()
@@ -123,26 +123,28 @@ abstract class Module
         if (File::exists($routes_file) === false) {
             return;
         }
-        if (!app()->routesAreCached()) {
-            $router = app('router');
+        if ( ! app()->routesAreCached()) {
+            $router       = app('router');
             $site_locales = [];
             try {
                 $site_locales = unserialize(get_option('site_locales', ''));
-            }catch(\Exception $e) {
-                
+            } catch (\Exception $e) {
+
             }
             $primary_locale = get_option('primary_locale', app()->getLocale());
-            if(!is_array($site_locales)) {
+            if ( ! is_array($site_locales)) {
                 $site_locales = [];
             }
 
             foreach ($site_locales as $locale) {
-                $route_group_params = ['namespace' => $this->getNameSpace() . '\Http\Controllers', 'middleware' => 'web'];
+                $route_group_params = ['namespace'  => $this->getNameSpace() . '\Http\Controllers',
+                                       'middleware' => 'web',
+                ];
                 $router->group($route_group_params, function () use ($routes_file, $locale, $primary_locale) {
-                    $prefix = '';
+                    $prefix       = '';
                     $route_prefix = '';
                     if ($locale !== $primary_locale) {
-                        $prefix = $locale . '.';
+                        $prefix       = $locale . '.';
                         $route_prefix = $locale;
                     }
                     require $routes_file;
