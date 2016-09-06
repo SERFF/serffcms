@@ -31,13 +31,9 @@ class NavigationMacro
     public function __toString()
     {
         $html = [];
-
         $html[] = '<ul class="sidebar-menu">';
-
         $html = array_merge($html, $this->buildMenu(\Request::getUri()));
-
         $html[] = '</ul>';
-
 
         return implode("\n", $html);
     }
