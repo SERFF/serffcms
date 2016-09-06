@@ -30,7 +30,7 @@ class Installer
     public function __construct(MigrationManager $migrationManager, ModuleManager $moduleManager)
     {
         $this->migrationManager = $migrationManager;
-        $this->moduleManager = $moduleManager;
+        $this->moduleManager    = $moduleManager;
     }
 
     /**
