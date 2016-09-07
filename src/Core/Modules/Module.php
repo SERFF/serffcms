@@ -9,6 +9,11 @@ use Serff\Cms\Core\Console\Kernel;
 use Serff\Cms\Core\Migrations\MigrationManager;
 use Serff\Cms\Core\Navigation\AdminMenu;
 
+/**
+ * Class Module
+ *
+ * @package Serff\Cms\Core\Modules
+ */
 abstract class Module
 {
     /**
@@ -60,6 +65,9 @@ abstract class Module
         $this->httpKernel       = app(HttpKernel::class);
     }
 
+    /**
+     * @return void
+     */
     public function install()
     {
         $this->migrate();
@@ -173,6 +181,9 @@ abstract class Module
     }
 
 
+    /**
+     * @return void
+     */
     protected function registerViews()
     {
         $viewPath = $this->getPath() . '/views';
