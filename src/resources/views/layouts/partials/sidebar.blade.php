@@ -33,7 +33,7 @@
         <!-- /.search form -->
 
         <!-- Sidebar Menu -->
-    {!! \HTML::navigation() !!}
+    {!! \Html::navigation() !!}
     <!-- /.sidebar-menu -->
     </section>
     <!-- /.sidebar -->
