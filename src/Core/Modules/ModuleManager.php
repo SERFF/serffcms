@@ -9,8 +9,6 @@ use Serff\Cms\Modules\Core\PagesModule\PagesModule;
 use Serff\Cms\Modules\Core\PartialsModule\PartialsModule;
 use Serff\Cms\Modules\Core\TranslationsModule\TranslationsModule;
 use Serff\Cms\Modules\Core\UsersModule\UsersModule;
-use Serff\Cms\Modules\Custom\KabolaDealersModule\KabolaDealersModule;
-use Serff\Cms\Modules\Custom\KabolaProductsModule\KabolaProductsModule;
 
 /**
  * Class ModuleManager
@@ -27,8 +25,6 @@ class ModuleManager
         MediaModule::class,
         CustomFieldsModule::class,
         PartialsModule::class,
-        KabolaProductsModule::class,
-        KabolaDealersModule::class,
     ];
 
     /**
