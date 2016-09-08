@@ -83,8 +83,8 @@ abstract class Repository
      *
      * @return mixed
      */
-    public function getLatestPaginated($length)
+    public function getLatestPaginated($length, $with = [])
     {
-        return $this->model->orderBy('id', 'DESC')->paginate($length);
+        return $this->model->with($with)->orderBy('id', 'DESC')->paginate($length);
     }
 }
