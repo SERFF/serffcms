@@ -53,7 +53,7 @@ abstract class Repository
      * @param $id
      * @param $attributes
      *
-     * @return Model
+     * @return bool
      */
     public function update($id, $attributes)
     {
@@ -76,5 +76,15 @@ abstract class Repository
     public function all()
     {
         return $this->model->get();
+    }
+
+    /**
+     * @param $length
+     *
+     * @return mixed
+     */
+    public function getLatestPaginated($length)
+    {
+        return $this->model->orderBy('id', 'DESC')->paginate($length);
     }
 }
