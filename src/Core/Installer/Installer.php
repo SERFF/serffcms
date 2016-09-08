@@ -39,9 +39,11 @@ class Installer
     public function install()
     {
         $this->migrationManager->prepare();
-        $modules = $this->moduleManager->coreModules();
-
-        $this->moduleManager->install($modules);
+        $coreModules = $this->moduleManager->coreModules();
+        $customModules = $this->moduleManager->customModules();
+        
+        $this->moduleManager->install($coreModules);
+        $this->moduleManager->install($customModules);
 
         $this->selected_theme();
 

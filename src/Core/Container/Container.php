@@ -26,6 +26,16 @@ class Container
     protected $middlewares = [];
 
     /**
+     * @var array
+     */
+    protected $coreModules = [];
+
+    /**
+     * @var array
+     */
+    protected $customModules = [];
+
+    /**
      * @param Theme $theme
      */
     public function addTheme($theme)
@@ -79,6 +89,38 @@ class Container
     public function getMiddlewares()
     {
         return $this->middlewares;
+    }
+
+    /**
+     * @param $modules
+     */
+    public function setCoreModules($modules)
+    {
+        $this->coreModules = $modules;
+    }
+
+    /**
+     * @return array
+     */
+    public function getCoreModules()
+    {
+        return $this->coreModules;
+    }
+
+    /**
+     * @param $modules
+     */
+    public function setCustomModules($modules)
+    {
+        $this->customModules = $modules;
+    }
+
+    /**
+     * @return array
+     */
+    public function getCustomModules()
+    {
+        return $this->customModules;
     }
 
 }

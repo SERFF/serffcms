@@ -11,8 +11,8 @@ class Loader
         $finder = new Finder();
 
         $finder->files()
-            ->name('*.php')
-            ->in($path);
+               ->name('*.php')
+               ->in($path);
 
         $items = [];
 
@@ -26,7 +26,6 @@ class Loader
 
             try {
                 $items[] = new \ReflectionClass($class);
-
             } catch (\Exception $e) {
 
             }

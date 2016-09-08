@@ -64,19 +64,35 @@ class CmsServiceProvider extends ServiceProvider
         $reflector  = new ReflectionClass(get_class($this));
         $modulePath = str_replace('Core/Providers/CmsServiceProvider.php', 'Modules/', $reflector->getFileName());
 
-        $items2           = [];
+        $customModules    = [];
         $modulePathCustom = app_path('Modules');
         $modulesNamespace = 'App\Modules';
 
-        $items = $this->loader->find($namespace, $modulePath);
+        $coreModules = $this->loader->find($namespace, $modulePath);
         if (\File::exists($modulePathCustom)) {
-            $items2 = $this->loader->find($modulesNamespace, $modulePathCustom);
+            $customModules = $this->loader->find($modulesNamespace, $modulePathCustom);
         }
-
-        $items = array_merge($items, $items2);
-        foreach ($items as $class) {
+        app('Container')->setCoreModules($coreModules);
+        app('Container')->setCustomModules($this->sanitizeCustomModules($customModules));
+        
+        $coreModules = array_merge($coreModules, $customModules);
+        foreach ($coreModules as $class) {
             $this->loadModule($class);
         }
+    }
+
+    public function sanitizeCustomModules($modules)
+    {
+        $modules = ( array_map(function($module) {
+            if($module->implementsInterface(ModuleContract::class)) {
+                return $module->newInstance();
+            }
+            return false;
+        }, $modules));
+        
+        return array_filter($modules, function($item) {
+            return ($item !== false);
+        });
     }
 
     /**

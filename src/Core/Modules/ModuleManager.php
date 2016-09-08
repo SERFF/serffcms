@@ -1,7 +1,9 @@
 <?php
 namespace Serff\Cms\Core\Modules;
 
+use ReflectionClass;
 use Serff\Cms\Contracts\ModuleContract;
+use Serff\Cms\Core\Cms\Loader\Loader;
 use Serff\Cms\Modules\Core\CustomFieldsModule\CustomFieldsModule;
 use Serff\Cms\Modules\Core\MediaModule\MediaModule;
 use Serff\Cms\Modules\Core\OptionsModule\OptionsModule;
@@ -35,6 +37,11 @@ class ModuleManager
         return array_map(function ($module) {
             return new $module;
         }, $this->core_modules);
+    }
+
+    public function customModules()
+    {
+        return app('Container')->getCustomModules();
     }
 
     /**
