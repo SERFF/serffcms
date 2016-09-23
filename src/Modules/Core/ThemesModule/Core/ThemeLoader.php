@@ -52,8 +52,8 @@ class ThemeLoader
         foreach ($items as $item) {
             $this->registerTheme($item);
         }
-
-        if (app('Container')->getActiveTheme() === null) {
+        
+        if ((app('Container')->getActiveTheme() === null) && ($this->getFirstActiveThemeFromArray($items)!== null)) {
             $this->registerTheme($this->getFirstActiveThemeFromArray($items), true);
         }
     }

@@ -26,7 +26,7 @@ class Kernel extends \App\Console\Kernel
             }
         );
 
-        $this->commands($command_name);
+        $this->registerTheCommand($command_name);
     }
 
     /**
@@ -46,7 +46,7 @@ class Kernel extends \App\Console\Kernel
      *
      * @return void
      */
-    public function commands($commands)
+    public function registerTheCommand($commands)
     {
         $commands = is_array($commands) ? $commands : func_get_args();
 
