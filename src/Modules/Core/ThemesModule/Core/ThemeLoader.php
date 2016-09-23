@@ -1,6 +1,7 @@
 <?php
 namespace Serff\Cms\Modules\Core\ThemesModule\Core;
 
+use Illuminate\Contracts\Logging\Log;
 use ReflectionClass;
 use Serff\Cms\Core\Cms\Loader\Loader;
 use Serff\Cms\Modules\Core\ThemesModule\Contracts\ThemeContract;
@@ -48,14 +49,19 @@ class ThemeLoader
             $this->getCmsThemes($themePath),
             $this->getLocalThemes(app_path('Themes'))
         );
-
+        
         foreach ($items as $item) {
             $this->registerTheme($item);
         }
-        
-        if ((app('Container')->getActiveTheme() === null) && ($this->getFirstActiveThemeFromArray($items)!== null)) {
-            $this->registerTheme($this->getFirstActiveThemeFromArray($items), true);
+
+        if ((app('Container')->getActiveTheme() === null) && (count($items) > 0)) {
+            $theme = $this->getFirstActiveThemeFromArray($items);
+            
+            if($theme !== null) {
+                $this->registerTheme($theme, true);
+            }
         }
+
     }
 
     /**
@@ -70,6 +76,10 @@ class ThemeLoader
              * @var Theme $Theme
              * @var \ReflectionClass $class
              */
+            if($class === null) {
+                return null;
+            }
+            
             if ($class->implementsInterface(ThemeContract::class)) {
                 $Theme = $class->newInstance();
                 if ($Theme->getHidden() === false) {
@@ -128,6 +138,7 @@ class ThemeLoader
             if (($class->getName() === $this->selected_theme)) {
                 $Theme->boot();
             }
+
             if ($overrule) {
                 $Theme->boot();
                 set_option('selected_theme', get_class($Theme));
