@@ -194,10 +194,9 @@ class CmsServiceProvider extends ServiceProvider
             \Serff\Cms\Core\Providers\AdminServiceProvider::class,
         ];
 
-        $manifestPath = app()->getCachedServicesPath();
-
-        (new ProviderRepository(app(), new Filesystem, $manifestPath))
-            ->load($providers);
+        foreach ($providers as $provider) {
+            app()->register($provider);
+        }
     }
 
     /**
