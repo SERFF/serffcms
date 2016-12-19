@@ -51,9 +51,6 @@ class InstallationServiceProvider extends ServiceProvider
         
 
         $this->installer->install();
-        
-        dd('installed');
-
     }
 
 

@@ -1,6 +1,7 @@
 <?php
 namespace Serff\Cms\Core\Installer;
 
+use Illuminate\Support\Facades\DB;
 use Serff\Cms\Core\Migrations\MigrationManager;
 use Serff\Cms\Core\Modules\ModuleManager;
 use Serff\Cms\Theme\Core\Nano\Nano;
@@ -38,6 +39,11 @@ class Installer
      */
     public function install()
     {
+        try {
+            DB::connection()->getPdo();
+        }catch (\Exception $e) {
+            return '';
+        }
         $this->migrationManager->prepare();
         $coreModules = $this->moduleManager->coreModules();
         $customModules = $this->moduleManager->customModules();

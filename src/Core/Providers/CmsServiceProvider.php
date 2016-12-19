@@ -48,6 +48,7 @@ class CmsServiceProvider extends ServiceProvider
         $this->setKernel();
         $this->registerFacades();
         $this->otherServiceProviders();
+        
 
         $this->loader = app()->make(Loader::class);
         $this->registerContainer();
