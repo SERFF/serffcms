@@ -45,6 +45,10 @@ class ThemeView
     {
         $Theme = app('Container')->getActiveTheme();
         
+        if($Theme == null) {
+            return null;
+        }
+        
         return \View::exists($Theme->getName() . '::' . $view);
     }
 

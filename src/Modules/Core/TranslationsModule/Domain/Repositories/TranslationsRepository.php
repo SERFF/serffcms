@@ -145,7 +145,7 @@ class TranslationsRepository extends Repository
      */
     public function getGroups()
     {
-        return $this->group->orderBy('name')->lists('name', 'id')->all();
+        return $this->group->orderBy('name')->pluck('name', 'id')->all();
     }
 
     /**

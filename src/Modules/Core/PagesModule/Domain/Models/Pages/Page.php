@@ -42,7 +42,7 @@ class Page extends Model
      */
     public static function getSlugsInPipeFormat($locale)
     {
-        $slugs = self::where('status', self::STATUS_PUBLISHED)->lists('slug')
+        $slugs = self::where('status', self::STATUS_PUBLISHED)->pluck('slug')
             ->all();
 
         $old_slugs = Revision::whereRevisionableType(Page::class)
@@ -50,7 +50,7 @@ class Page extends Model
             ->join('pages', 'revisionable_id', '=', 'pages.id')
             ->where('pages.status', Page::STATUS_PUBLISHED)
             ->where('pages.status', $locale)
-            ->lists('old_value')
+            ->pluck('old_value')
             ->all();
 
         $slugs = array_merge($slugs, $old_slugs);

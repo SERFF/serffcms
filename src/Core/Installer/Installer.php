@@ -41,13 +41,13 @@ class Installer
     {
         try {
             DB::connection()->getPdo();
-        }catch (\Exception $e) {
+        } catch (\Exception $e) {
             return '';
         }
         $this->migrationManager->prepare();
-        $coreModules = $this->moduleManager->coreModules();
+        $coreModules   = $this->moduleManager->coreModules();
         $customModules = $this->moduleManager->customModules();
-        
+
         $this->moduleManager->install($coreModules);
         $this->moduleManager->install($customModules);
 

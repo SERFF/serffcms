@@ -25,7 +25,7 @@ class InstallationServiceProvider extends ServiceProvider
      * @var Installer
      */
     protected $installer;
-    
+
     /**
      * Register the service provider.
      *
@@ -47,8 +47,6 @@ class InstallationServiceProvider extends ServiceProvider
         if ($this->is_installed()) {
             return;
         }
-
-        
 
         $this->installer->install();
     }
