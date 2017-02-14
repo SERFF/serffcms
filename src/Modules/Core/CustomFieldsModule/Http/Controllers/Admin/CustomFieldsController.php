@@ -171,12 +171,19 @@ class CustomFieldsController extends Controller
 
         $request_data = $request->all();
         foreach (array_get($request_data, 'input_label') as $key => $value) {
-            $fields[] = $fieldRepository->create([
-                'name'        => Str::slug(array_get($request_data, 'input_name.' . $key)),
-                'label'       => array_get($request_data, 'input_label.' . $key),
-                'type'        => array_get($request_data, 'input_type.' . $key),
-                'description' => array_get($request_data, 'description.' . $key, ''),
-                'required'    => array_get($request_data, 'required.' . $key, false),
+	        $required_field = array_get( $request_data, 'required.' . $key, false );
+	        if($required_field == 'no') {
+		        $required_field = false;
+	        }
+	        if($required_field == 'yes') {
+		        $required_field = true;
+	        }
+	        $fields[]       = $fieldRepository->create([
+		        'name'        => Str::slug(array_get($request_data, 'input_name.' . $key)),
+		        'label'       => array_get($request_data, 'input_label.' . $key),
+		        'type'        => array_get($request_data, 'input_type.' . $key),
+		        'description' => array_get($request_data, 'description.' . $key, ''),
+		        'required'    => $required_field,
             ]);
         }
 
