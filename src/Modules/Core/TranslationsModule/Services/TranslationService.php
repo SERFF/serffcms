@@ -22,7 +22,7 @@ class TranslationService
     /**
      * @var array
      */
-    protected $locales = ['nl', 'en'];
+    protected $locales = ['nl'];
 
     /**
      * TranslationService constructor.
