@@ -22,8 +22,8 @@ Route::group(['prefix' => $route_prefix], function () use ($prefix, $locale) {
     if (env('INSTALLED', false) == true) { //@todo move to middleware
 
         Route::get('/', ['as' => $prefix . 'home', 'uses' => 'PagesController@getIndex']);
-        Route::get(translate('general.page', [], true, true, 'messages', $locale).'/{slug}', ['as' => $prefix . 'page', 'uses' => 'PagesController@getPage'])->where('{slug}', Page::getSlugsInPipeFormat('nl'));
-
+        //Route::get(translate('general.page', [], true, true, 'messages', $locale).'/{slug}', ['as' => $prefix . 'page', 'uses' => 'PagesController@getPage'])->where('{slug}', Page::getSlugsInPipeFormat('nl'));
+	    Route::get('/{slug}', ['as' => $prefix . 'page', 'uses' => 'PagesController@getPage'])->where('{slug}', Page::getSlugsInPipeFormat('nl'));
     } else {
         Route::get('/', function () {
             return 'Installed / migrated';
