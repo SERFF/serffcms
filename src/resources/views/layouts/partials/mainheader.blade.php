@@ -6,7 +6,7 @@
         <!-- mini logo for sidebar mini 50x50 pixels -->
         <span class="logo-mini"><b>K</b>C</span>
         <!-- logo for regular state and mobile devices -->
-        <span class="logo-lg"><b>Kabola</b> CMS</span>
+        <span class="logo-lg"><b>SERFF</b> CMS</span>
     </a>
 
     <!-- Header Navbar -->

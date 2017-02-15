@@ -8,7 +8,7 @@
 <body class="hold-transition login-page">
     <div class="login-box">
         <div class="login-logo">
-            <a href="{{ url('/') }}"><b>Kabola</b> CMS</a>
+            <a href="{{ url('/') }}"><b>SERFF</b> CMS</a>
         </div><!-- /.login-logo -->
 
     @if (count($errors) > 0)
