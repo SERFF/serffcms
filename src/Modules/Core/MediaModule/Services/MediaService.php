@@ -146,6 +146,7 @@ class MediaService
         if ($this->imageExists($media_file)) {
             return ['file' => $media_file, 'width' => $width, 'height' => $height];
         }
+        
         /**
          * @var \Intervention\Image\Image $image
          */
@@ -165,12 +166,13 @@ class MediaService
         $image->fit($width, $height);
         try {
             if ($this->imageExists($media_file) == false) {
-                if(\File::isDirectory($media_path)) {
+                if(!\File::isDirectory($media_path)) {
                     \File::makeDirectory($media_path);
                 }
                 $image->save($media_file);
             }
         }catch(\Exception $e) {
+            
         }
 
         return ['file' => $media_file, 'width' => $width, 'height' => $height];

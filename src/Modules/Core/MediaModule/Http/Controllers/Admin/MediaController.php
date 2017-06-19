@@ -23,9 +23,6 @@ class MediaController extends Controller
         $this->mediaService = $mediaService;
         $this->cacheManager = $cacheManager;
 
-        //very very ugly fix!
-        ini_set('upload_max_filesize', '128M');
-        ini_set('post_max_size', '128M');
     }
 
     public function getLibrary()

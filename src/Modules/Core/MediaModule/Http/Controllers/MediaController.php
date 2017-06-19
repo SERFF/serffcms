@@ -21,7 +21,7 @@ class MediaController extends Controller
     public function getImage($id, $name, $width = null, $height = null)
     {
         $cache_key = sprintf('image_cache_%s', md5($id.$width.$height.$name));
-
+        
         return Cache::remember($cache_key, 99999, function () use ($id, $width, $height) {
             $item = $this->mediaService->getImage(Media::find($id), $width, $height);
 
