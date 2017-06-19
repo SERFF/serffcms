@@ -165,7 +165,9 @@ class MediaService
         $image->fit($width, $height);
 
         if ($this->imageExists($media_file) == false) {
-            \File::makeDirectory($media_path);
+            if(\File::isDirectory($media_path)) {
+                \File::makeDirectory($media_path);
+            }
             $image->save($media_file);
         }
 
