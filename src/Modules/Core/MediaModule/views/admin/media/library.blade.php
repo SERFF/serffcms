@@ -35,12 +35,12 @@
                                     'width' => array_get($item, 'image.width'),
                                     'height' => array_get($item, 'image.height'),
                                 ]) }}" id="media-image">
-                                    <img src="{{ route('media.view', ['id' => array_get($item, 'id'),
-                                    'name' => array_get($item, 'original_name'),
-                                    'width' => array_get($item, 'thumbnail.width'),
-                                    'height' => array_get($item, 'thumbnail.height'),
-                                ]) }}"
-                                         alt="{{ array_get($item, 'title') }}" class="img-responsive">
+                                    {{--<img src="{{ route('media.view', ['id' => array_get($item, 'id'),--}}
+                                    {{--'name' => array_get($item, 'original_name'),--}}
+                                    {{--'width' => array_get($item, 'thumbnail.width'),--}}
+                                    {{--'height' => array_get($item, 'thumbnail.height'),--}}
+                                {{--]) }}"--}}
+                                         {{--alt="{{ array_get($item, 'title') }}" class="img-responsive">--}}
                                     <div class="library-overlay">
                                         <div class="library-overlay-options">
                                             <a href="{{ route('admin.media.delete', ['id' => array_get($item, 'id')]) }}"><i
